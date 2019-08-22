@@ -1,4 +1,4 @@
-verificaDivisivel :: Float -> Float -> String
+verificaDivisivel :: Int -> Int -> String
 verificaDivisivel _ 0 = "Nao"
 verificaDivisivel 0 _ = "Nao"
 verificaDivisivel a b 
@@ -8,7 +8,8 @@ verificaDivisivel a b
 main = do
 	putStrLn("Digite o primeiro numero: ")
 	xStr <- getLine
-	let x = (read xStr :: Float)
+	let x = (read xStr :: Int)
 	putStrLn("Digite o segundo numero: ")
 	yStr <- getLine
-	let y = (read yStr :: Float)
+	let y = (read yStr :: Int)
+	print(verificaDivisivel x y)
