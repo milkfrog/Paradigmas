@@ -6,7 +6,21 @@ aprovados3 (a:b)
 
 aprovados2 :: [(Int, String, Float)] -> [String]
 aprovados2 [] = []
-aprovados2 lista = [getNome x | x <- lista ]
+aprovados2 lista = [getNome x | x <- lista, (aprovado (getNota x))]
+
+aprovado :: Float -> Bool
+aprovado x
+	| (x >= 6) = True
+	| otherwise = False
+
+aprovados :: [(Int, String, Float)] -> [String]
+aprovados [] = []
+aprovados lista = map getNome (filter verifica lista)
+
+verifica :: (Int, String, Float) -> Bool
+verifica (a,b,c)
+	| (c >= 6) = True
+	| otherwise = False
 
 alunos :: [(Int, String, Float)]
 alunos = [(1, "Ana", 3.4), (2, "Bob", 6.7), (3, "Tom", 7.6)]
@@ -20,8 +34,13 @@ getNota (a,b,c) = c
 getPrimeiroAluno :: [(Int, String, Float)] -> (Int, String, Float)
 getPrimeiroAluno (a:_) = a
 
-gerarPares :: [t] -> [u] -> [(t,u)] 
-gerarPares l1 l2 = [(a,b) | a <- l1, b <- l2]
+gerarPares :: [(Int, String, Float)] -> [(Int, String, Float)] -> [((Int, String, Float),(Int, String, Float))] 
+gerarPares l1 l2 = [(a,b) | a <- l1, b <- l2, diferentes a b]
+
+diferentes :: (Int, String, Float) -> (Int, String, Float) -> Bool
+diferentes (_,a,_) (_,b,_)
+	| (a < b) = True
+	| otherwise = False
 
 main = do
-    print (aprovados2 alunos)
+    print (gerarPares alunos alunos)
