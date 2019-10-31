@@ -1,4 +1,6 @@
 *.o
 *.hi
+*.fas
+*.lib
 # Default ignored files
 /workspace.xml
